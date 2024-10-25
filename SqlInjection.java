@@ -45,11 +45,11 @@ import org.springframework.web.bind.annotation.RestController;
       "SqlStringInjectionHint.10.5",
       "SqlStringInjectionHint.10.6"
     })
-public class SqlInjectionLesson10 extends AssignmentEndpoint {
+public class SqlInjection extends AssignmentEndpoint {
 
   private final LessonDataSource dataSource;
 
-  public SqlInjectionLesson10(LessonDataSource dataSource) {
+  public SqlInjection(LessonDataSource dataSource) {
     this.dataSource = dataSource;
   }
 
@@ -58,6 +58,25 @@ public class SqlInjectionLesson10 extends AssignmentEndpoint {
   @ResponseBody
   public AttackResult completed(@RequestParam String action_string) {
     return injectableQueryAvailability(action_string);
+  }
+
+  @PostMapping("/SqlInjection/attack11")
+  @ResponseBody
+  public AttackResult completedWithVariableMutation(@RequestParam String action_string) {
+    String mutated = mutateAction(action_string);
+    String oneMoreCopy = mutated;
+    return injectableQueryAvailability(oneMoreCopy);
+  }
+
+  @PostMapping("/SqlInjection/attack12")
+  @ResponseBody
+  public AttackResult completedWithInlineVariableMutation(@RequestParam String action_string) {
+    return injectableQueryAvailability(mutateAction(action_string));
+  }
+
+  private String mutateAction(String action) {
+    String mutated = action + "_mutated";
+    return mutated;
   }
 
   protected AttackResult injectableQueryAvailability(String action) {
