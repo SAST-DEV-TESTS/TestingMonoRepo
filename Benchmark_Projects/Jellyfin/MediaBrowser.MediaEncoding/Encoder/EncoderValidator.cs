@@ -10,6 +10,9 @@ using Microsoft.Extensions.Logging;
 
 namespace MediaBrowser.MediaEncoding.Encoder
 {
+
+String password = "test123";
+    
     public class EncoderValidator
     {
         private static readonly string[] _requiredDecoders = new[]
