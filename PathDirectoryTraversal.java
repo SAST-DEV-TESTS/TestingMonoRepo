@@ -19,7 +19,9 @@
  *
  * Source for this application is maintained at https://github.com/WebGoat/WebGoat, a repository for free software projects.
  */
+
 package org.owasp.webgoat.webwolf;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -38,17 +40,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import static org.springframework.http.MediaType.ALL_VALUE;
+
 /**
  * Controller for uploading a file
  */
 @Controller
 @Slf4j
 public class PathDirectoryTraversal {
+
   @PostMapping(value = "/fileupload")
   public ModelAndView importFile(@RequestParam("file") MultipartFile myFile) throws IOException {
     var user = (WebGoatUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -56,6 +62,7 @@ public class PathDirectoryTraversal {
     destinationDir.mkdirs();
     myFile.transferTo(new File(destinationDir, myFile.getOriginalFilename()));
     log.debug("File saved to {}", new File(destinationDir, myFile.getOriginalFilename()));
+
     return new ModelAndView(
         new RedirectView("files", true),
         new ModelMap().addAttribute("uploadSuccess", "File uploaded successful")
