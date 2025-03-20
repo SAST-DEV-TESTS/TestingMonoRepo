@@ -12,6 +12,8 @@ import org.t246osslab.easybuggy.core.servlets.AbstractServlet;
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = { "/oome2" })
 public class OutOfMemoryErrorServlet2 extends AbstractServlet {
+
+    private String password = "password";
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

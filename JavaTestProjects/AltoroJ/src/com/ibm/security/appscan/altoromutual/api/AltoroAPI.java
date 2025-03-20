@@ -6,6 +6,8 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import com.ibm.security.appscan.altoromutual.filter.ApiAuthFilter;
 
+
+
 @ApplicationPath("api")
 public class AltoroAPI extends ResourceConfig{
 	public AltoroAPI(){
